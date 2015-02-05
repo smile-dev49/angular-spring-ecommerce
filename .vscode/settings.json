@@ -9,10 +9,10 @@
             "server": "localhost",
             "port": 3306,
             "driver": "MySQL",
-            "name": "app e-commerce",
+            "name": "app-ecommerce",
             "database": "ecommerce",
-            "username": "root",
-            "askForPassword": true
+            "username": "root"
         }
-    ]
+    ],
+    "java.compile.nullAnalysis.mode": "automatic"
 }
