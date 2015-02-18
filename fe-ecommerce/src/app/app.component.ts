@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderDesktopComponent } from './components/header-desktop/header-desktop.component';
@@ -10,7 +10,9 @@ import { HomeComponent } from './pages/home/home.component';
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet, 
+    RouterOutlet,
+    RouterLink,
+    RouterLinkActive, 
     ProductListComponent, 
     SidebarComponent, 
     HeaderDesktopComponent, 

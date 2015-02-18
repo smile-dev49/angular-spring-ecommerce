@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../common/product';
 import { CurrencyPipe } from '@angular/common';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'product-list',
   standalone: true,
@@ -12,19 +12,28 @@ import { CurrencyPipe } from '@angular/common';
 })
 export class ProductListComponent implements OnInit{
 
-  products: Product[] = [];
+  products!:Product[];
+  currentCategoryId!: number | null;
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.listProducts();
+    this.route.paramMap.subscribe(
+      params  => {
+        this.currentCategoryId = Number(params.get('id'));
+        console.log(this.currentCategoryId)
+        this.listProducts();
+      }
+    );
   }
 
   listProducts(){
-    this.productService.getProductList().subscribe(
-      data => {
-        this.products = data;
-      }
+    if (!this.route.snapshot.paramMap.has('id')) {
+      this.currentCategoryId = 1;
+    }
+    this.productService.getProductList(this.currentCategoryId).subscribe(
+      products => this.products = products
     )
   }
 }
