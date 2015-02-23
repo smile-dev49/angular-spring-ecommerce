@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {CategoryService} from '../../services/category/category.service'
+import { Category } from '../../common/category';
 
 @Component({
   selector: 'category-menu-list',

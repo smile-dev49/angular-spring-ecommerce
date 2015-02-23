@@ -1,14 +1,7 @@
 <ul class="list-unstyled navbar-list">
-    <li>
-        <a routerLink="/category/1" routerLinkActive="active-link">Books</a>
-    </li>
-    <li>
-        <a routerLink="/category/2" routerLinkActive="active-link">Coffee Mugs</a>
-    </li>
-    <li>
-        <a routerLink="/category/3" routerLinkActive="active-link">Mouse Pads</a>
-    </li>
-    <li>
-        <a routerLink="/category/4" routerLinkActive="active-link">Luggage Tags</a>
-    </li>
+    @for (category of categories; track $index) {
+        <li>
+            <a routerLink="/category/{{category.id}}" routerLinkActive="active-link">{{category.name}}</a>
+        </li>
+    }
 </ul>
