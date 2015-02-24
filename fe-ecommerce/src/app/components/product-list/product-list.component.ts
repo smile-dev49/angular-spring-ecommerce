@@ -2,11 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product/product.service';
 import { Product } from '../../common/product';
 import { CurrencyPipe } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
+import { debounce, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 @Component({
   selector: 'product-list',
   standalone: true,
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, RouterLink],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })
@@ -22,7 +23,6 @@ export class ProductListComponent implements OnInit{
     this.route.paramMap.subscribe(
       params  => {
         this.currentCategoryId = Number(params.get('id'));
-        console.log(this.currentCategoryId)
         this.listProducts();
       }
     );
@@ -32,7 +32,28 @@ export class ProductListComponent implements OnInit{
     if (!this.route.snapshot.paramMap.has('id')) {
       this.currentCategoryId = 1;
     }
+    if(this.route.snapshot.paramMap.has('keyword')){
+      console.log('search...')
+      this.handleSearchProducts();
+    }
+    else{
+      this.handleListProducts();
+    }
+    
+  }
+
+  handleListProducts(){
     this.productService.getProductList(this.currentCategoryId).subscribe(
+      products => this.products = products
+    )
+  }
+
+  handleSearchProducts(){
+    const theKeyWord: string|null = this.route.snapshot.paramMap.get('keyword');
+    console.log(theKeyWord);
+    
+    this.productService.getProductSearchList(theKeyWord)
+    .subscribe(
       products => this.products = products
     )
   }
