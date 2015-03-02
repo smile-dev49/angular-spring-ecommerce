@@ -3,11 +3,27 @@ import { ProductService } from '../../services/product/product.service';
 import { Product } from '../../common/product';
 import { CurrencyPipe, NgClass } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ProductCardComponent } from '../product-card/product-card.component';
 @Component({
   selector: 'product-list',
   standalone: true,
-  imports: [CurrencyPipe, RouterLink, NgClass],
-  templateUrl: './product-list.component.html',
+  imports: [CurrencyPipe, NgClass, ProductCardComponent],
+  template:`
+  <div class="row">
+    @for (product of products; track $index) {
+      <product-card class="col-md-3" [product]="product"/>
+    }
+    <nav aria-label="Page navigation example">
+      <ul class="pagination">
+        <li class="page-item"><button class="page-link" (click)="handlePaginate('prev')">Previous</button></li>
+        @for (item of [].constructor(totalPage); track $index) {
+          <li class="page-item" [ngClass]="{'active': pageNumber == $index}"><button class="page-link" (click)="handlePaginate($index)">{{$index + 1}}</button></li>
+        }
+        <li class="page-item"><button class="page-link" (click)="handlePaginate('next')">Next</button></li>
+      </ul>
+    </nav>
+  </div>
+  `,
   styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent implements OnInit{
