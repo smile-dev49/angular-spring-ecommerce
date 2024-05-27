@@ -23,7 +23,6 @@ export class CategoryMenuComponent implements OnInit{
   listCategories() {
     this.categoryService.getCategories().subscribe(
       data => {
-        console.log('Categories:' + JSON.stringify(data));
         this.categories = data;
       }
     );

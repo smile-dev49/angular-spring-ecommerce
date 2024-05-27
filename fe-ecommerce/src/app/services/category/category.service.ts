@@ -14,9 +14,6 @@ export class CategoryService {
 
   getCategories() : Observable<Category[]>{
     const searchUrl = `${environment.categoriesURL}`;
-    console.log(searchUrl);
-    
-
     return this.httpClient.get<GetResponseCategories>(searchUrl).pipe(
       map(response => response._embedded.categories)
     );
