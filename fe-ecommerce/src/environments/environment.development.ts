@@ -1,3 +1,6 @@
+const baseURL = 'http://localhost:8080/api'
+
 export const environment = {
-    BaseURL : 'http://localhost:8080/api/products'
+    productsURL : `${baseURL}/products`,
+    categoriesURL : `${baseURL}/categories`,
 };
