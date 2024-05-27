@@ -1,20 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { Product } from '../common/product';
+import { Product } from '../../common/product';
+import { environment } from '../../../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  
-  private baseUrl = 'http://localhost:8080/api/products';
 
   constructor(private httpClient: HttpClient) { }
 
   getProductList(theCategoryId : number | null): Observable<Product[]> {
 
-    const searchUrl = `${this.baseUrl}/search/findByCategoryId?id=${theCategoryId}`;
+    const searchUrl = `${environment.BaseURL}/search/findByCategoryId?id=${theCategoryId}`;
     console.log(searchUrl);
     
 

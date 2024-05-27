@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { CategoryMenuComponent } from '../category-menu/category-menu.component';
 
 @Component({
   selector: 'sidebar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [CategoryMenuComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
