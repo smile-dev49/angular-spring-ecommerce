@@ -14,4 +14,13 @@
       </div>
   </div>
   }
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><button class="page-link" (click)="handlePaginate('prev')">Previous</button></li>
+      @for (item of [].constructor(totalPage); track $index) {
+        <li class="page-item" [ngClass]="{'active': pageNumber == $index}"><button class="page-link" (click)="handlePaginate($index)">{{$index + 1}}</button></li>
+      }
+      <li class="page-item"><button class="page-link" (click)="handlePaginate('next')">Next</button></li>
+    </ul>
+</nav>
 </div>
