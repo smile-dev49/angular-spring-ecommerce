@@ -11,7 +11,7 @@ import { ProductCardComponent } from '../product-card/product-card.component';
   template:`
   <div class="row">
     @for (product of products; track $index) {
-      <product-card class="col-md-3" [product]="product"/>
+      <product-card class="col-md-3" [productValue]="product"/>
     }
     <nav aria-label="Page navigation example">
       <ul class="pagination">
